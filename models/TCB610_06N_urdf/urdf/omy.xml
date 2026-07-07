@@ -1,0 +1,227 @@
+<mujoco model="open_manipulator_y">
+    <!-- autolimits="true": 自动计算惯性参数 -->
+    <compiler angle="radian" autolimits="true"/>
+
+    <!-- 使用快速隐式积分器（比场景级的 RK4 优先级高） -->
+    <option integrator="implicitfast"/>
+
+    <!-- Default -->
+    <default>
+        <!-- note 默认关节电机控制器参数 -->
+        <default class="Y">
+            <joint range="-6.28319 6.28319" armature="0.1" damping="100.0"/>
+            <position kp="5000" forcerange="-2000 2000" ctrlrange="-6.28319 6.28319"/>
+        </default>
+        
+        <!-- note 默认夹爪电机控制器参数 -->
+        <default class="gripper">
+            <joint armature="0.1" damping="10.0"/>
+            <position kp="1000" forcerange="-100 100"/>
+        </default>
+    </default>
+
+    <asset>
+        <!-- scale=0.001: 将毫米单位转换为米（MuJoCo使用国际单位制） -->
+        <mesh name="base_unit" file="assets/base_unit.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="link1" file="assets/link1.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="link2" file="assets/link2.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="link3" file="assets/link3.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="link4" file="assets/link4.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="link5" file="assets/link5.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="link6" file="assets/link6.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="flange" file="assets/flange.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="base" file="assets/base.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="r1" file="assets/r1.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="r2" file="assets/r2.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="l1" file="assets/l1.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="l2" file="assets/l2.stl" scale="0.001 0.001 0.001"/>
+    </asset>
+
+    <worldbody>
+        <!-- 固定底座，不动 -->
+        <geom name="base_unit" type="mesh" rgba="0.2 0.2 0.2 1" mesh="base_unit"/>
+
+        <body name="link1" pos="0 0 0.8715">
+            <inertial pos="-0.000110636 -0.00547113 -0.0158977" quat="0.98558 0.168758 -0.00294757 0.0120358" mass="2.06488" diaginertia="0.00303337 0.00279081 0.00221937"/>
+            <joint name="joint1" pos="0 0 0" axis="0 0 1" class="Y"/>
+            <geom type="mesh" rgba="0.2 0.2 0.2 1" mesh="link1"/>
+
+            <body name="link2" pos="0 -0.1215 0">
+                <inertial pos="1.14054e-05 0.0161842 0.103606" quat="0.999988 -0.00477885 -0.000609836 0.00067321" mass="3.67954" diaginertia="0.051732 0.0503576 0.00449718"/>
+                <joint name="joint2" pos="0 0 0" axis="0 1 0" class="Y"/>
+                <geom type="mesh" rgba="0.2 0.2 0.2 1" mesh="link2"/>
+
+                <body name="link3" pos="0 0 0.247">
+                    <inertial pos="7.81487e-05 0.107185 0.141173" quat="0.999987 0.00500823 0.000469041 -0.00072733" mass="2.38659" diaginertia="0.0226944 0.021922 0.00277422"/>
+                    <joint name="joint3" pos="0 0 0" axis="0 1 0" class="Y"/>
+                    <geom type="mesh" rgba="0.2 0.2 0.2 1" mesh="link3"/>
+
+                    <body name="link4" pos="0 0.1215 0.2195">
+                        <inertial pos="-0.000133183 -0.107467 0.0190907" quat="0.983636 0.179196 0.00338061 -0.0183488" mass="1.40023" diaginertia="0.00175475 0.00162284 0.00115817"/>
+                        <joint name="joint4" pos="0 0 0" axis="0 1 0" class="Y"/>
+                        <geom type="mesh" rgba="0.2 0.2 0.2 1" mesh="link4"/>
+
+                        <body name="link5" pos="0 -0.113 0">
+                            <inertial pos="0.000133183 -0.0190907 0.109967" quat="0.822247 0.568825 0.0105841 -0.015365" mass="1.40023" diaginertia="0.00175475 0.00162284 0.00115817"/>
+                            <joint name="joint5" pos="0 0 0" axis="0 0 1" class="Y"/>
+                            <geom type="mesh" rgba="0.2 0.2 0.2 1" mesh="link5"/>
+
+                            <body name="link6" pos="0 0 0.1155">
+                                <inertial pos="1.6005e-05 -0.103085 0.00570277" quat="0.456875 0.889528 0.00170634 -0.00130773" mass="0.652774" diaginertia="0.00112656 0.000847594 0.000551829"/>
+                                <joint name="joint6" pos="0 0 0" axis="0 1 0" class="Y"/>
+                                <geom type="mesh" rgba="0.2 0.2 0.2 1" mesh="link6"/>
+                                <!-- ps 法兰盘，位置在 link6 的 Y轴 方向 -0.103m 处 -->
+                                <geom name="flange" pos="0 -0.103 0" quat="1 0 0 0" type="mesh" rgba="0.2 0.2 0.2 1" mesh="flange"/>
+                                <!-- ps 夹爪底座，位置在 link6 的 Y轴 方向 -0.109m 处 -->
+                                <geom name="base" pos="0 -0.109 0" quat="0.500398 0.5 0.5 -0.499602" type="mesh" mesh="base"/>
+
+                                <!-- ps 相机中心点 -->
+                                <body name="camera_center" pos="0.0 -0.09 0.1">
+                                    <!-- <geom name="camera_center" size="0.005 0.005 0.005" pos="0. 0. 0." contype="0" conaffinity="0" type="box" rgba="1.00 0.00 0.0 0" /> -->
+                                    <geom name="camera_center" size="0.005 0.005 0.005" pos="0. 0. 0." contype="0" conaffinity="0" type="box" rgba="1.00 0.00 0.0 1" />
+                                    <camera name="egocentric" pos="0 0 0" xyaxes="-1 0 0 0 0 1" fovy="90" />
+                                </body>
+
+                                <!-- * 末端 TCP -->
+                                <!-- 实际工程中，换了不同长度的工具（如焊枪、吸盘），就要重新标定 TCP 位置。TCP 不是机械臂的固有属性，是工具+任务决定的。 -->
+                                <!-- pos="0 -0.22 0": 相对于 link6 末端向下 0.22 米，这是专门为了逆运动学(IK)求解而定义的，用于确定工具尖端的位置和姿态 -->
+                                <body name="tcp_link" pos="0 -0.22 0">
+                                    <!-- 透明红色胶囊体（仅用于可视化 IK 目标）-->
+                                    <!-- fromto="0 0 -0.5 0 0 0.1"：表示胶囊体起始位置和结束位置，也就是总长度是 0.5-(-0.5)=1.0 米 -->
+                                    <!-- <geom name="tcp_link" type="capsule" fromto="0 0 -0.5 0 0 0.5" size="0.01" rgba="1.0 0.2 0.2 1.0" contype="0" conaffinity="0"/> -->
+                                    <!-- 还是改成不透明球体吧，好像更符合常理... -->
+                                    <geom name="tcp_link" type="sphere" size="0.01" rgba="1.0 0.2 0.2 1.0" contype="0" conaffinity="0"/>
+                                </body>
+
+                                <!-- ps 末端执行器（夹爪）定义 -->
+                                <body name="rh_p12_rn_r1" pos="0.00803822 -0.156994 6.40105e-06" quat="0.500398 0.5 0.5 -0.499602">
+                                    <inertial pos="0 0.034 0.004" mass="0.068" diaginertia="1e-06 1e-06 1e-06"/>
+                                    <joint name="rh_r1" pos="0 0 0" axis="1 0 0" range="0 1.1" class="gripper"/>
+                                    <geom name="rh_r1" type="mesh" mesh="r1"/>
+
+                                    <body name="rh_p12_rn_r2" pos="0 0.0493634 0.0285">
+                                        <inertial pos="0 0.006 0.011" mass="0.022" diaginertia="1e-06 1e-06 1e-06"/>
+                                        <joint name="rh_r2" pos="0 0 0" axis="-1 0 0" range="0 1" class="gripper"/>
+                                        <geom name="rh_r2" type="mesh" mesh="r2"/>
+                                    </body>
+                                </body>
+                                <body name="rh_p12_rn_l1" pos="-0.00796177 -0.157006 -6.34017e-06" quat="0.500398 0.5 0.5 -0.499602">
+                                    <inertial pos="0 -0.034 0.004" mass="0.068" diaginertia="1e-06 1e-06 1e-06"/>
+                                    <joint name="rh_l1" pos="0 0 0" axis="-1 0 0" range="0 1.1" class="gripper"/>
+                                    <geom name="rh_l1" type="mesh" mesh="l1"/>
+
+                                    <body name="rh_p12_rn_l2" pos="0 -0.0493634 0.0285">
+                                        <inertial pos="0 -0.006 0.011" mass="0.022" diaginertia="1e-06 1e-06 1e-06"/>
+                                        <joint name="rh_l2" pos="0 0 0" axis="1 0 0" range="0 1" class="gripper"/>
+                                        <geom name="rh_l2" type="mesh" mesh="l2"/>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <!-- Exclude contact information -->
+    <contact>
+        <exclude body1="world" body2="link1"/>
+    </contact>
+
+    <!-- NOTE 驱动器定义（电机控制） -->
+    <actuator>
+        <!-- 6个主关节的位置控制器 -->
+        <position name="actuator_joint1" joint="joint1" class="Y"/>
+        <position name="actuator_joint2" joint="joint2" class="Y"/>
+        <position name="actuator_joint3" joint="joint3" class="Y"/>
+        <position name="actuator_joint4" joint="joint4" class="Y"/>
+        <position name="actuator_joint5" joint="joint5" class="Y"/>
+        <position name="actuator_joint6" joint="joint6" class="Y"/>
+
+        <!-- 4个夹爪关节的位置控制器 -->
+        <!-- kp=500: 单独指定夹爪的比例增益（低于主臂） -->
+        <position name="actuator_rh_r1" joint="rh_r1" ctrlrange="0.000 1.100" class="gripper" kp="500"/>
+        <position name="actuator_rh_r2" joint="rh_r2" ctrlrange="0.000 1.000" class="gripper" kp="500"/>
+        <position name="actuator_rh_l1" joint="rh_l1" ctrlrange="0.000 1.100" class="gripper" kp="500"/>
+        <position name="actuator_rh_l2" joint="rh_l2" ctrlrange="0.000 1.000" class="gripper" kp="500"/>
+    </actuator>
+
+</mujoco>
+
+<!-- Model attributes:
+
+        # name:  open_manipulator_y
+        # dt: 0.002
+        # HZ: 500
+        # n_qpos:  10
+        # n_qvel:  10
+        # n_qacc:  10
+        # n_qctrl:  10
+        # n_light:  0
+        # n_camera:  1
+        # integrator:  IMPLICITFAST
+
+        # n_body:  13
+        body_0 name: world
+        body_1 name: link1
+        body_2 name: link2
+        body_3 name: link3
+        body_4 name: link4
+        body_5 name: link5
+        body_6 name: link6
+        body_7 name: camera_center
+        body_8 name: tcp_link
+        body_9 name: rh_p12_rn_r1
+        body_10 name: rh_p12_rn_r2
+        body_11 name: rh_p12_rn_l1
+        body_12 name: rh_p12_rn_l2
+
+        # n_geom:  15
+        geom_names:  ['base_unit', '', '', '', '', '', '', 'flange', 'base', 'camera_center', 'tcp_link', 'rh_r1', 'rh_r2', 'rh_l1', 'rh_l2']
+
+        # n_joint:  10
+        joint_0 name: joint1
+        joint_1 name: joint2
+        joint_2 name: joint3
+        joint_3 name: joint4
+        joint_4 name: joint5
+        joint_5 name: joint6
+        joint_6 name: rh_r1
+        joint_7 name: rh_r2
+        joint_8 name: rh_l1
+        joint_9 name: rh_l2
+
+        # n_dof:[10] (=number of rows of Jacobian)
+        dof_0 None attached to joint: joint1  body: link1
+        dof_1 None attached to joint: joint2  body: link2
+        dof_2 None attached to joint: joint3  body: link3
+        dof_3 None attached to joint: joint4  body: link4
+        dof_4 None attached to joint: joint5  body: link5
+        dof_5 None attached to joint: joint6  body: link6
+        dof_6 None attached to joint: rh_r1  body: rh_p12_rn_r1
+        dof_7 None attached to joint: rh_r2  body: rh_p12_rn_r2
+        dof_8 None attached to joint: rh_l1  body: rh_p12_rn_l1
+        dof_9 None attached to joint: rh_l2  body: rh_p12_rn_l2
+
+        # n_ctrl: 10
+        ctrl_0 actuator_joint1 range: -6.28319 ~ 6.28319 gear: 1.0
+        ctrl_1 actuator_joint2 range: -6.28319 ~ 6.28319 gear: 1.0
+        ctrl_2 actuator_joint3 range: -6.28319 ~ 6.28319 gear: 1.0
+        ctrl_3 actuator_joint4 range: -6.28319 ~ 6.28319 gear: 1.0
+        ctrl_4 actuator_joint5 range: -6.28319 ~ 6.28319 gear: 1.0
+        ctrl_5 actuator_joint6 range: -6.28319 ~ 6.28319 gear: 1.0
+        ctrl_6 actuator_rh_r1 range: 0.0 ~ 1.1 gear: 1.0
+        ctrl_7 actuator_rh_r2 range: 0.0 ~ 1.0 gear: 1.0
+        ctrl_8 actuator_rh_l1 range: 0.0 ~ 1.1 gear: 1.0
+        ctrl_9 actuator_rh_l2 range: 0.0 ~ 1.0 gear: 1.0
+
+        # n_cam: 1
+        cam_0 egocentric fov: 90.0
+
+        # n_sensor:  0
+        sensor_names: []
+
+        # n_site: 0
+        site_names: []
+ -->

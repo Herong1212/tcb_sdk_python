@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mujoco model="TCB610_06N">
+    <compiler angle="radian"/>
+
+    <default>
+        <default class="arm">
+            <joint armature="0.1" damping="100.0"/>
+            <position kp="5000" forcerange="-2000 2000"/>
+        </default>
+        <default class="gripper">
+            <joint armature="0.1" damping="10.0"/>
+            <position kp="1000" forcerange="-100 100"/>
+        </default>
+    </default>
+
+    <asset>
+        <mesh name="tl_robot_link0" content_type="model/stl" file="../meshes/tl_robot_link0.STL"/>
+        <mesh name="tl_robot_link1" content_type="model/stl" file="../meshes/tl_robot_link1.STL"/>
+        <mesh name="tl_robot_link2" content_type="model/stl" file="../meshes/tl_robot_link2.STL"/>
+        <mesh name="tl_robot_link3" content_type="model/stl" file="../meshes/tl_robot_link3.STL"/>
+        <mesh name="tl_robot_link4" content_type="model/stl" file="../meshes/tl_robot_link4.STL"/>
+        <mesh name="tl_robot_link5" content_type="model/stl" file="../meshes/tl_robot_link5.STL"/>
+        <mesh name="tl_robot_link6" content_type="model/stl" file="../meshes/tl_robot_link6.STL"/>
+        <mesh name="gripper_base" content_type="model/stl" file="../../lebai_lmg90_gripper/meshes/gripper_base.stl"/>
+        <mesh name="gripper_link1" content_type="model/stl" file="../../lebai_lmg90_gripper/meshes/gripper_link1.stl"/>
+        <mesh name="gripper_link2" content_type="model/stl" file="../../lebai_lmg90_gripper/meshes/gripper_link2.stl"/>
+        <mesh name="gripper_link_finger" content_type="model/stl" file="../../lebai_lmg90_gripper/meshes/gripper_link_finger.stl"/>
+    </asset>
+    <worldbody>
+        <!-- ps 好像是固定底座？ -->
+        <body name="tl_robot_link0">
+            <inertial pos="0.000197158 -5.65943e-05 0.0376676" quat="0.538001 0.538006 -0.45904 0.458679" mass="0.749899" diaginertia="0.00182626 0.00155561 0.00143055"/>
+            <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="tl_robot_link0"/>
+
+            <!-- 连杆 1 及其关节 -->
+            <body name="tl_robot_link1" pos="0 0 0.1305">
+                <inertial pos="-3.2217e-06 -0.0151243 0.070502" quat="0.701912 0.087694 -0.0874904 0.701409" mass="0.518481" diaginertia="0.00182387 0.0016711 0.000717623"/>
+                <joint name="tl_robot_joint1" pos="0 0 0" axis="0 0 1" range="-3.14159 3.14159" class="arm"/>
+                <geom type="mesh" rgba="1 1 1 1" mesh="tl_robot_link1"/>
+
+                <!--连杆 2 及其关节 -->
+                <body name="tl_robot_link2" pos="0 0.016 0.1315" quat="0.707105 -0.707108 0 0">
+                    <inertial pos="-3.64949e-06 -0.158783 0.00258164" quat="0.495008 0.504376 -0.504956 0.495572" mass="0.922467" diaginertia="0.00339536 0.00326664 0.00102183"/>
+                    <joint name="tl_robot_joint2" pos="0 0 0" axis="0 0 -1" range="-2.35619 2.35619" class="arm"/>
+                    <geom type="mesh" rgba="1 1 1 1" mesh="tl_robot_link2"/>
+
+                    <!-- 连杆 3 及其关节 -->
+                    <body name="tl_robot_link3" pos="0 -0.3205 -0.0295" quat="-2.59734e-06 -0.707105 -0.707108 -2.59735e-06">
+                        <inertial pos="2.78354e-06 0.0694961 0.00637377" quat="0.545314 0.450411 -0.450161 0.545086" mass="0.396499" diaginertia="0.00145833 0.00137497 0.000317175"/>
+                        <joint name="tl_robot_joint3" pos="0 0 0" axis="0 0 1" range="-0.959931 4.10152" class="arm"/>
+                        <geom type="mesh" rgba="1 1 1 1" mesh="tl_robot_link3"/>
+
+                        <!-- 连杆 4 及其关节 -->
+                        <body name="tl_robot_link4" pos="0 0.1745 -0.0135" quat="0.707105 -0.707108 0 0">
+                            <inertial pos="-3.40934e-06 -0.0133245 0.0587132" quat="0.701356 0.0901883 -0.0899373 0.70134" mass="0.244289" diaginertia="0.000545373 0.000507362 0.000179622"/>
+                            <joint name="tl_robot_joint4" pos="0 0 0" axis="0 0 1" range="-3.14159 3.14159" class="arm"/>
+                            <geom type="mesh" rgba="1 1 1 1" mesh="tl_robot_link4"/>
+
+                            <!-- 连杆 5 及其关节 -->
+                            <body name="tl_robot_link5" pos="0 0.0145 0.105" quat="0.499998 -0.5 0.5 0.500002">
+                                <inertial pos="-1.4032e-05 -0.0434237 0.000526799" quat="0.405146 0.579542 -0.579347 0.405395" mass="0.248666" diaginertia="0.00047391 0.000435366 0.00018989"/>
+                                <joint name="tl_robot_joint5" pos="0 0 0" axis="0 0 1" range="-3.75246 0.610865" class="arm"/>
+                                <geom type="mesh" rgba="0.568627 0.596078 0.623529 1" mesh="tl_robot_link5"/>
+
+                                <!-- 连杆 6 及其关节 -->
+                                <body name="tl_robot_link6" pos="0 -0.1145 -0.0145" quat="0.707105 0.707108 0 0">
+                                    <inertial pos="8.18734e-06 9.12465e-05 0.0267687" quat="0.516629 0.482777 -0.516779 0.48266" mass="0.222487" diaginertia="0.00018105 0.000135315 0.000134456"/>
+                                    <joint name="tl_robot_joint6" pos="0 0 0" axis="0 0 1" range="-3.14159 3.14159" class="arm"/>
+                                    <geom type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="tl_robot_link6"/>
+
+                                    <!-- 末端法兰盘: 紧贴 link6 末端, 直径68mm, 厚1cm -->
+                                    <body name="flange" pos="0 0 0.052">
+                                        <inertial pos="0 0 0" mass="0.0001" diaginertia="0.0001 0.0001 0.0001"/>
+                                        <geom type="cylinder" size="0.034 0.005" rgba="0.5 0.5 0.5 1" />
+                                    </body>
+
+                                    <!-- 乐白 LMG90 夹爪 -->
+                                    <body name="gripper_base" pos="0 0 0.065">
+                                        <geom type="mesh" rgba="0.86 0.85 0.81 1" mesh="gripper_base"/>
+
+                                        <!-- 右指链 -->
+                                        <body name="gripper_r_link1" pos="0.025 0 0.0856" quat="0 0 0.707107 0.707107">
+                                            <joint name="gripper_r_joint1" axis="0 0 1" range="-10 10" class="gripper"/>
+                                            <geom type="mesh" rgba="0.86 0.85 0.81 1" mesh="gripper_link1"/>
+                                        </body>
+                                        <body name="gripper_r_link2" pos="0.0115 0 0.1056" quat="0.707107 0.707107 0 0">
+                                            <joint name="gripper_r_joint2" axis="0 0 1" range="-10 10" class="gripper"/>
+                                            <geom type="mesh" rgba="0.86 0.85 0.81 1" mesh="gripper_link2"/>
+                                            <body name="gripper_r_link_finger" pos="0 0.053 0" quat="0 0 1 0">
+                                                <joint name="gripper_r_joint_finger" axis="0 0 1" range="-10 10" class="gripper"/>
+                                                <geom type="mesh" rgba="0.86 0.85 0.81 1" mesh="gripper_link_finger"/>
+                                            </body>
+                                        </body>
+
+                                        <!-- 左指链 -->
+                                        <body name="gripper_l_link1" pos="-0.025 0 0.0856" quat="0.707107 0.707107 0 0">
+                                            <joint name="gripper_l_joint1" axis="0 0 1" range="-10 10" class="gripper"/>
+                                            <geom type="mesh" rgba="0.86 0.85 0.81 1" mesh="gripper_link1"/>
+                                        </body>
+                                        <body name="gripper_l_link2" pos="-0.0115 0 0.1056" quat="0 0 0.707107 0.707107">
+                                            <joint name="gripper_l_joint2" axis="0 0 1" range="-10 10" class="gripper"/>
+                                            <geom type="mesh" rgba="0.86 0.85 0.81 1" mesh="gripper_link2"/>
+                                            <body name="gripper_l_link_finger" pos="0 0.053 0" quat="0 0 1 0">
+                                                <joint name="gripper_l_joint_finger" axis="0 0 1" range="-10 10" class="gripper"/>
+                                                <geom type="mesh" rgba="0.86 0.85 0.81 1" mesh="gripper_link_finger"/>
+                                                <body name="gripper_tip" pos="0.0115 0 0"/>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <!-- 6DOF 关节位置控制 -->
+        <position name="actuator_joint1" joint="tl_robot_joint1" class="arm"/>
+        <position name="actuator_joint2" joint="tl_robot_joint2" class="arm"/>
+        <position name="actuator_joint3" joint="tl_robot_joint3" class="arm"/>
+        <position name="actuator_joint4" joint="tl_robot_joint4" class="arm"/>
+        <position name="actuator_joint5" joint="tl_robot_joint5" class="arm"/>
+        <position name="actuator_joint6" joint="tl_robot_joint6" class="arm"/>
+
+        <!-- 夹爪控制 -->
+        <position name="actuator_gripper_r_joint1" joint="gripper_r_joint1" class="gripper" kp="500"/>
+        <position name="actuator_gripper_r_joint2" joint="gripper_r_joint2" class="gripper" kp="500"/>
+        <position name="actuator_gripper_r_joint_finger" joint="gripper_r_joint_finger" class="gripper" kp="500"/>
+        <position name="actuator_gripper_l_joint1" joint="gripper_l_joint1" class="gripper" kp="500"/>
+        <position name="actuator_gripper_l_joint2" joint="gripper_l_joint2" class="gripper" kp="500"/>
+        <position name="actuator_gripper_l_joint_finger" joint="gripper_l_joint_finger" class="gripper" kp="500"/>
+    </actuator>
+</mujoco>

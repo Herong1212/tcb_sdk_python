@@ -1,0 +1,140 @@
+# SDK 发送的命令字
+
+FRAME_HEADER: "4e66" # 数据帧头
+
+HEARTBEAT: "7266" # 心跳包
+
+# 6001端口:
+CONTROL_CYCLE:
+    SET: "2020" # 设置控制器通讯周期
+    INQUIRE: "2021" # 查询控制器通讯周期
+
+ROBOT_STOP: "3037" # 机器人紧急停止
+
+CONTROLLER_INIT_FINISH: "1000" # 控制器初始化是否完成
+
+T5_SYSTEM_INQUIRE: "1002" # T5系统查询
+
+HARDWARE_SYSTEM_VERSION: "1004" # 硬件系统版本查询
+
+SYSTEM_VERSION_INQUIRE: "1010" # 系统版本查询
+
+DUMP_LOG_FILE_INQUIRE: "1020" # 上位机查询崩溃日志文件
+
+LOG_FILE_INQUIRE: "1022" # 上位机查询日志文件
+
+REBOOT_CONTROLLER: "1031" # 控制器重启
+
+SHUTDOWN_CONTROLLER: "1032" # 控制器关机
+
+CONTROLLER_IP:
+    SET: "1040" # 设置控制器ip
+    INQUIRE: "1041" # 查询控制器ip
+
+CONFIG_FILE_INQUIRE: "1070" # 查询配置文件
+
+FAULT_RESET: "1100" # 清除伺服错误
+
+SERVO_COMMANDS:
+    SET: "3000" # 设置伺服状态
+    INQUIRE: "3001" # 查询伺服状态
+
+SERVO_CONNECT_INQUIRE: "3004" # 伺服连接状态查询
+
+OPERATION_MODE:
+    SET: "3010" # 设置操作模式
+    INQUIRE: "3011" # 查询操作模式
+
+ENABLE_STATUS:
+    SET: "3030" # 设置使能状态
+    INQUIRE: "3031" # 查询使能状态
+
+COORD_MODE:
+    SET: "3040" # 设置坐标模式
+    INQUIRE: "3041" # 查询坐标模式
+
+SPEED_CONTROL:
+    SET: "3050" # 设置全局速度
+    INQUIRE: "3051" # 查询全局速度
+
+GO_HOME: "3070" # 回原点
+
+ROBOT_MOVEMENT:
+    POINT: "3077" # 机器人关节运动MOVJ
+    LINEAR: "3078" # 机器人直线运动MOVL
+    CIRULAR: "3079" # 机器人圆弧运动MOVC
+
+ROBOT_MOTION_PARAMETERS:
+    SET: "3090" # 设置机器人运动参数
+    INQUIRE: "3091" # 查询机器人运动参数
+
+JOG_OPERATION:
+    MOVE: "30A0" # 执行点动操作
+    STOP: "30A1" # 停止执行点动操作
+
+JOG_JOINTPARAMETER:
+    SET: "30A2" # 设置关节轴点动参数
+    INQUIRE: "30A3" # 查询关节轴点动参数
+
+JOG_RECTPARAMETER:
+    SET: "30A5" # 设置直角坐标点动参数
+    INQUIRE: "30A6" # 查询直角坐标点动参数
+
+JOG_SENSITIVITY:
+    SET: "30A8" # 设置点动灵敏度
+    INQUIRE: "30A9" # 查询点动灵敏度
+
+CURRENTPOS_INQUIRE: "3210" # 获取当前位置
+
+AXISACTUALVEL_INQUIRE: "3230" # 查询轴速度
+
+SERVO_TEMPERATURE_EXIST: "3250" # 查询伺服温度是否存在
+
+MOTOR_STATUS_INQUIRE:
+    SPEED: "3260" # 查询电机转速
+    TORQUE: "3262" # 查询电机扭矩
+    TEMPERATURE: "326A" # 查询电机温度
+
+FOLLOWING_ERROR_INQUIRE: "3870" # 查询跟随误差
+
+JOB_CONTROL:
+    JOBSEND_DONE: "5601" # 开始运行作业文件
+    STOP_JOB_RUN: "5602" # 停止正在运行的作业文件
+    JOBFILE_LIST_INQUIRE: "5010" # 获取作业文件列表
+    JOBFILE_OPEN: "5100" # 打开作业文件
+    JOBFILE_OPEN_INQUIRE: "5103" # 查询打开的作业文件
+
+DIRECTMOTION:
+    MODE_SET: "5640" # 开启/关闭socket直接控制运动模式
+    MODE_INQUIRE: "5641" # 查询socket直接控制运动模式
+    INSERT_INSTRVEC: "5643" # 发送指令队列控制机械臂移动, 采用自动点位
+    MODE_SUSPEND: "5644" # 暂停追加队列运行
+    MODE_START: "5645" # 开始追加队列运行（暂停后，发送使用）
+    MODE_STOP: "5646" # 停止追加队列运行
+    MODE_STOP_KEEP_POWER_ON: "30D4" # 设置队列模式停止但不下电
+
+SLAVETYPE_LIST_INQUIRE: "7020" # 查询从站列表
+
+JOINTPARAMETER:
+    SET: "20C5" # 设置关节参数
+    INQUIRE: "20C6" # 查询关节参数
+
+DECAREPARAMETER:
+    SET: "20C8" # 设置机器人笛卡尔参数
+    INQUIRE: "20C9" # 查询机器人笛卡尔参数
+
+ROBOT_TYPE_AND_MAPPING:
+    SET: "2002" # 设置当前机器人类型及映射
+    INQUIRE: "2003" # 查询当前机器人类型及映射
+
+# 7000端口:
+MULTI_POINT: "1E02" # 运动控制
+
+SERVOCONTROL:
+    OPEN: "1E10" # 开关伺服点位运动控制
+    MOVE: "1E12" # 伺服点位运动控制
+
+SERVO_J_CONTROL:
+    OPEN: "1E14" # 打开关节跟踪模式
+    MOVE: "1E15" # 发送跟踪关节位置
+    STOP: "1E16" # 停止跟踪关节位置

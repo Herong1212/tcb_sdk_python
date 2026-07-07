@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="TCB705_05N_urdf">
+ <mujoco>
+    <compiler meshdir="../meshes/" discardvisual="false"/>
+ </mujoco>
+  <link
+    name="tl_robot_link0">
+    <inertial>
+      <origin
+        xyz="0.0018902 -3.6902E-05 0.048157"
+        rpy="0 0 0" />
+      <mass
+        value="0.43435" />
+      <inertia
+        ixx="0.00088719"
+        ixy="7.0508E-09"
+        ixz="3.8148E-05"
+        iyy="0.00076562"
+        iyz="1.1569E-07"
+        izz="0.00087763" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link0.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.86667 0.86667 0.8902 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link0.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="tl_robot_link1">
+    <inertial>
+      <origin
+        xyz="3.7218E-06 -0.014376 0.067933"
+        rpy="0 0 0" />
+      <mass
+        value="0.14367" />
+      <inertia
+        ixx="0.00037046"
+        ixy="1.6893E-08"
+        ixz="-4.6083E-08"
+        iyy="0.00039142"
+        iyz="5.9077E-05"
+        izz="0.00015862" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="tl_robot_joint1"
+    type="revolute">
+    <origin
+      xyz="0 0 0.1224"
+      rpy="0 0 0" />
+    <parent
+      link="tl_robot_link0" />
+    <child
+      link="tl_robot_link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.141592654"
+      upper="3.141592654"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="tl_robot_link2">
+    <inertial>
+      <origin
+        xyz="5.9053E-06 -0.055346 0.0035842"
+        rpy="0 0 0" />
+      <mass
+        value="0.33033" />
+      <inertia
+        ixx="0.00090573"
+        ixy="1.3641E-08"
+        ixz="-3.5043E-08"
+        iyy="0.0003177"
+        iyz="-0.00017413"
+        izz="0.00093478" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="tl_robot_joint2"
+    type="revolute">
+    <origin
+      xyz="0 0.0155 0.1196"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="tl_robot_link1" />
+    <child
+      link="tl_robot_link2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.35619449"
+      upper="2.35619449"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="tl_robot_link3">
+    <inertial>
+      <origin
+        xyz="-0.000132757352653707 0.0133462171351898 0.0637589760194879"
+        rpy="0 0 0" />
+      <mass
+        value="0.302012540986821" />
+      <inertia
+        ixx="0.000691869705790603"
+        ixy="-5.09561031816092E-07"
+        ixz="2.6670085177538E-06"
+        iyy="0.000719388437057822"
+        iyz="-0.000114231544456731"
+        izz="0.000253132686095938" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="tl_robot_joint3"
+    type="revolute">
+    <origin
+      xyz="0 -0.149 -0.0155"
+      rpy="1.5708 0 0" />
+    <parent
+      link="tl_robot_link2" />
+    <child
+      link="tl_robot_link3" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.141592654"
+      upper="3.141592654"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="tl_robot_link4">
+    <inertial>
+      <origin
+        xyz="-1.1919E-05 0.056456 0.00097888"
+        rpy="0 0 0" />
+      <mass
+        value="0.24893" />
+      <inertia
+        ixx="0.0005647"
+        ixy="8.1382E-08"
+        ixz="-3.1473E-09"
+        iyy="0.00016557"
+        iyz="0.00010863"
+        izz="0.00057614" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.86667 0.86667 0.8902 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="tl_robot_joint4"
+    type="revolute">
+    <origin
+      xyz="0 -0.0165 0.121"
+      rpy="1.5708 1.5708 0" />
+    <parent
+      link="tl_robot_link3" />
+    <child
+      link="tl_robot_link4" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-4.101523742"
+      upper="0.959931089"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="tl_robot_link5">
+    <inertial>
+      <origin
+        xyz="7.3099E-05 -0.01274 0.050866"
+        rpy="0 0 0" />
+      <mass
+        value="0.074325" />
+      <inertia
+        ixx="9.8328E-05"
+        ixy="1.1534E-08"
+        ixz="8.0626E-10"
+        iyy="0.00010098"
+        iyz="2.0685E-05"
+        izz="4.5428E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="tl_robot_joint5"
+    type="revolute">
+    <origin
+      xyz="0 0.1425 -0.0165"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="tl_robot_link4" />
+    <child
+      link="tl_robot_link5" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.141592654"
+      upper="3.141592654"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="tl_robot_link6">
+    <inertial>
+      <origin
+        xyz="2.8242E-06 -0.038846 0.0038434"
+        rpy="0 0 0" />
+      <mass
+        value="0.066035" />
+      <inertia
+        ixx="8.4574E-05"
+        ixy="-2.4508E-08"
+        ixz="-1.1793E-08"
+        iyy="4.1686E-05"
+        iyz="-1.7128E-05"
+        izz="8.4254E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="tl_robot_joint6"
+    type="revolute">
+    <origin
+      xyz="0 0.0115 0.0875"
+      rpy="-1.5708 1.5708 0" />
+    <parent
+      link="tl_robot_link5" />
+    <child
+      link="tl_robot_link6" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.752457892"
+      upper="0.610865238"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="tl_robot_link7">
+    <inertial>
+      <origin
+        xyz="-1.0794E-05 -0.00010862 0.02885"
+        rpy="0 0 0" />
+      <mass
+        value="0.16704" />
+      <inertia
+        ixx="8.1122E-05"
+        ixy="2.2269E-07"
+        ixz="-4.7782E-09"
+        iyy="8.2788E-05"
+        iyz="1.8211E-07"
+        izz="9.2705E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link7.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://TCB705_05N_urdf/meshes/tl_robot_link7.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="tl_robot_joint7"
+    type="revolute">
+    <origin
+      xyz="0 -0.1015 -0.0115"
+      rpy="1.5708 0 0" />
+    <parent
+      link="tl_robot_link6" />
+    <child
+      link="tl_robot_link7" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.141592654"
+      upper="3.141592654"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+  <!-- 修正末端180度偏差的虚拟关节和连杆 -->
+  <joint
+      name="tl_robot_joint_end"
+      type="fixed">
+      <origin
+          xyz="0 0 0"
+          rpy="0 0 -3.141592654" />  <!-- 绕Z轴旋转180度修正 -->
+      <parent
+          link="tl_robot_link7" />
+      <child
+          link="tl_robot_link_end" />
+      <axis
+          xyz="0 0 1" />
+  </joint>
+
+  <link
+      name="tl_robot_link_end">
+      <inertial>
+          <origin
+              xyz="0 0 0"
+              rpy="0 0 0" />
+          <mass
+              value="0.001" />
+          <inertia
+              ixx="1e-6"
+              ixy="0"
+              ixz="0"
+              iyy="1e-6"
+              iyz="0"
+              izz="1e-6" />
+      </inertial>
+      <visual>
+          <origin
+              xyz="0 0 0"
+              rpy="0 0 0" />
+          <geometry>
+              <box size="0.01 0.01 0.01" />  <!-- 小方块用于可视化 -->
+          </geometry>
+          <material
+              name="eef_color">
+              <color
+                  rgba="1 0 0 0.5" />  <!-- 红色半透明 -->
+          </material>
+      </visual>
+      <collision>
+          <origin
+              xyz="0 0 0"
+              rpy="0 0 0" />
+          <geometry>
+              <box size="0.001 0.001 0.001" />  <!-- 很小的碰撞体 -->
+          </geometry>
+      </collision>
+  </link>
+</robot>

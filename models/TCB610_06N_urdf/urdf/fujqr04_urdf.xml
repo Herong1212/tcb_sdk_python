@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mujoco model="fujqr04_urdf">
+    <compiler angle="radian"/>
+    <asset>
+        <mesh name="base_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/base_link.STL"/>
+        <mesh name="right_wheel_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_wheel_link.STL"/>
+        <mesh name="left_wheel_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_wheel_link.STL"/>
+        <mesh name="r_wheel1_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/r_wheel1_link.STL"/>
+        <mesh name="right_wheel1_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_wheel1_link.STL"/>
+        <mesh name="r_wheel2_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/r_wheel2_link.STL"/>
+        <mesh name="right_wheel2_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_wheel2_link.STL"/>
+        <mesh name="l_wheel1_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/l_wheel1_link.STL"/>
+        <mesh name="left_wheel1_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_wheel1_link.STL"/>
+        <mesh name="l_wheel2_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/l_wheel2_link.STL"/>
+        <mesh name="left_wheel2_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_wheel2_link.STL"/>
+        <mesh name="torso_lift_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/torso_lift_link.STL"/>
+        <mesh name="body_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/body_link.STL"/>
+        <mesh name="right_tl_robot_link0" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_tl_robot_link0.STL"/>
+        <mesh name="right_tl_robot_link1" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_tl_robot_link1.STL"/>
+        <mesh name="right_tl_robot_link2" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_tl_robot_link2.STL"/>
+        <mesh name="right_tl_robot_link3" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_tl_robot_link3.STL"/>
+        <mesh name="right_tl_robot_link4" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_tl_robot_link4.STL"/>
+        <mesh name="right_tl_robot_link5" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_tl_robot_link5.STL"/>
+        <mesh name="right_tl_robot_link6" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_tl_robot_link6.STL"/>
+        <mesh name="right_tl_robot_link7" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/right_tl_robot_link7.STL"/>
+        <mesh name="left_tl_robot_link0" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_tl_robot_link0.STL"/>
+        <mesh name="left_tl_robot_link1" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_tl_robot_link1.STL"/>
+        <mesh name="left_tl_robot_link2" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_tl_robot_link2.STL"/>
+        <mesh name="left_tl_robot_link3" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_tl_robot_link3.STL"/>
+        <mesh name="left_tl_robot_link4" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_tl_robot_link4.STL"/>
+        <mesh name="left_tl_robot_link5" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_tl_robot_link5.STL"/>
+        <mesh name="left_tl_robot_link6" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_tl_robot_link6.STL"/>
+        <mesh name="left_tl_robot_link7" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/left_tl_robot_link7.STL"/>
+        <mesh name="head1_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/head1_link.STL"/>
+        <mesh name="head2_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/head2_link.STL"/>
+        <mesh name="head3_link" content_type="model/stl" file="/home/robot/Wiki-GRx-MJCF/models/TCB/urdf/../meshes/composite_robot/head3_link.STL"/>
+    </asset>
+    <worldbody>
+        <body name="base_link">
+            <inertial pos="-0.0585192 -1.67638e-05 0.151552" quat="0.705334 -0.0141857 -0.0140319 0.708594" mass="26.6474" diaginertia="0.608864 0.596011 0.501759"/>
+            <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="base_link"/>
+            <body name="right_wheel_link" pos="0.00924308 -0.163664 -0.213501">
+                <inertial pos="-0.000904107 0.000627774 -0.000184699" quat="0.417888 0.570411 0.570499 0.41777" mass="0.906065" diaginertia="0.00274397 0.00146499 0.0014649"/>
+                <geom type="mesh" rgba="1 1 1 1" mesh="right_wheel_link"/>
+            </body>
+            <body name="left_wheel_link" pos="0.00924308 0.163636 -0.213501">
+                <inertial pos="-1.23989e-05 -0.000627775 4.48484e-06" quat="0.564948 0.425247 0.425128 0.565035" mass="0.906065" diaginertia="0.00274397 0.00146499 0.0014649"/>
+                <geom type="mesh" rgba="1 1 1 1" mesh="left_wheel_link"/>
+            </body>
+            <body name="r_wheel1_link" pos="0.183795 -0.135014 -0.20355">
+                <inertial pos="-0.0113137 -0.000218433 -0.0261993" quat="0.313866 0.313133 -0.634141 0.633484" mass="0.04285" diaginertia="1.66156e-05 1.45067e-05 1.23944e-05"/>
+                <geom type="mesh" rgba="1 1 1 1" mesh="r_wheel1_link"/>
+                <body name="right_wheel1_link" pos="-0.0205 0 -0.0432">
+                    <inertial pos="7.80907e-07 4.31785e-09 -2.03205e-06" quat="0.693159 -0.139747 -0.139746 0.693161" mass="0.110487" diaginertia="7.47299e-05 4.38982e-05 4.38665e-05"/>
+                    <geom type="mesh" rgba="1 1 1 1" mesh="right_wheel1_link"/>
+                </body>
+            </body>
+            <body name="r_wheel2_link" pos="-0.166205 -0.135014 -0.21325">
+                <inertial pos="-0.0140278 -0.000231594 -0.0222608" quat="0.39165 0.393343 -0.586992 0.589349" mass="0.0459568" diaginertia="2.40729e-05 1.88109e-05 1.66802e-05"/>
+                <geom type="mesh" rgba="1 1 1 1" mesh="r_wheel2_link"/>
+                <body name="right_wheel2_link" pos="-0.0265 0 -0.0395" quat="1 0 0.000649199 0">
+                    <inertial pos="-1.20284e-07 7.29827e-12 2.90074e-07" quat="0.693497 -0.138086 -0.138088 0.693488" mass="0.0867603" diaginertia="3.80488e-05 2.54729e-05 2.5452e-05"/>
+                    <geom type="mesh" rgba="1 1 1 1" mesh="right_wheel2_link"/>
+                </body>
+            </body>
+            <body name="l_wheel1_link" pos="0.183795 0.134986 -0.20355">
+                <inertial pos="-0.0113137 -0.000218433 -0.0261993" quat="0.313866 0.313133 -0.634141 0.633484" mass="0.04285" diaginertia="1.66156e-05 1.45067e-05 1.23944e-05"/>
+                <geom type="mesh" rgba="1 1 1 1" mesh="l_wheel1_link"/>
+                <body name="left_wheel1_link" pos="-0.0205 0 -0.0432">
+                    <inertial pos="7.80907e-07 4.31786e-09 -2.03205e-06" quat="0.693159 -0.139747 -0.139746 0.693161" mass="0.110487" diaginertia="7.47299e-05 4.38982e-05 4.38665e-05"/>
+                    <geom type="mesh" rgba="1 1 1 1" mesh="left_wheel1_link"/>
+                </body>
+            </body>
+            <body name="l_wheel2_link" pos="-0.166205 0.134986 -0.21325">
+                <inertial pos="-0.0140278 -0.000231594 -0.0222608" quat="0.391645 0.393338 -0.586995 0.589352" mass="0.0459568" diaginertia="2.40727e-05 1.88109e-05 1.66799e-05"/>
+                <geom type="mesh" rgba="1 1 1 1" mesh="l_wheel2_link"/>
+                <body name="left_wheel2_link" pos="-0.0265 0 -0.0395" quat="1 0 0.000649199 0">
+                    <inertial pos="-1.20284e-07 7.40127e-12 2.90073e-07" quat="0.693497 -0.138086 -0.138088 0.693488" mass="0.0867603" diaginertia="3.80488e-05 2.54729e-05 2.5452e-05"/>
+                    <geom type="mesh" rgba="1 1 1 1" mesh="left_wheel2_link"/>
+                </body>
+            </body>
+            <body name="torso_lift_link" pos="-0.106875 -1.42828e-05 0.41713">
+                <inertial pos="0.040909 -0.00069826 -0.0258766" quat="0.677112 0.681095 -0.192819 0.201118" mass="6.37628" diaginertia="0.0123596 0.0120244 0.0106753"/>
+                <geom type="mesh" rgba="0.752941 0.752941 0.752941 1" mesh="torso_lift_link"/>
+                <body name="body_link" pos="0.1625 0 -0.036">
+                    <inertial pos="0.0117686 -0.00077485 0.18869" quat="0.999881 -0.00453508 0.012746 -0.0073698" mass="5.08807" diaginertia="0.0310661 0.0268643 0.019557"/>
+                    <geom type="mesh" rgba="0.890196 0.890196 0.913725 1" mesh="body_link"/>
+                    <body name="right_tl_robot_link0" pos="0.0150728 -0.015 0.315" quat="0 0 0.707107 -0.707107">
+                        <inertial pos="0.00192375 -6.92485e-06 0.0385487" quat="0.536265 0.536216 -0.460941 0.460897" mass="0.716846" diaginertia="0.00182028 0.00153779 0.00141877"/>
+                        <geom type="mesh" rgba="1 1 1 1" mesh="right_tl_robot_link0"/>
+                        <body name="right_tl_robot_link1" pos="-0.000927239 0 0.1315">
+                            <inertial pos="-6.06536e-06 -0.0151213 0.0704992" quat="0.701916 0.0876928 -0.0874885 0.701405" mass="0.518527" diaginertia="0.00182387 0.0016711 0.000717618"/>
+                            <joint name="right_tl_robot_joint1" pos="0 0 0" axis="0 0 1" range="-3.14 3.14" actuatorfrcrange="-10 10"/>
+                            <geom type="mesh" rgba="1 1 1 1" mesh="right_tl_robot_link1"/>
+                            <body name="right_tl_robot_link2" pos="0 0.016 0.1315" quat="0.707107 -0.707107 0 0">
+                                <inertial pos="-1.26961e-05 -0.0664218 0.00457833" quat="0.439899 0.55357 -0.553733 0.439806" mass="0.458839" diaginertia="0.00177795 0.00164318 0.000493146"/>
+                                <joint name="right_tl_robot_joint2" pos="0 0 0" axis="0 0 1" range="-2.35619 2.35619" actuatorfrcrange="-10 10"/>
+                                <geom type="mesh" rgba="1 1 1 1" mesh="right_tl_robot_link2"/>
+                                <body name="right_tl_robot_link3" pos="0 -0.1675 -0.016" quat="0.707107 0.707107 0 0">
+                                    <inertial pos="5.33178e-06 0.0166055 0.0826904" quat="0.703971 -0.0657796 0.0659527 0.704094" mass="0.463627" diaginertia="0.00172728 0.00162345 0.000418803"/>
+                                    <joint name="right_tl_robot_joint3" pos="0 0 0" axis="0 0 1" range="-3.14 3.14" actuatorfrcrange="-10 10"/>
+                                    <geom type="mesh" rgba="0.568627 0.596078 0.623529 1" mesh="right_tl_robot_link3"/>
+                                    <body name="right_tl_robot_link4" pos="0 -0.0135 0.153" quat="0.707107 0.707107 0 0">
+                                        <inertial pos="2.76608e-06 0.0694961 0.00637379" quat="0.545314 0.450411 -0.450161 0.545085" mass="0.396499" diaginertia="0.00145833 0.00137497 0.000317175"/>
+                                        <joint name="right_tl_robot_joint4" pos="0 0 0" axis="0 0 -1" range="-2.35619 2.35619" actuatorfrcrange="-10 10"/>
+                                        <geom type="mesh" rgba="1 1 1 1" mesh="right_tl_robot_link4"/>
+                                        <body name="right_tl_robot_link5" pos="0 0.1745 -0.0135" quat="0.707107 -0.707107 0 0">
+                                            <inertial pos="-3.40926e-06 -0.0133245 0.0587132" quat="0.701356 0.0901883 -0.0899373 0.70134" mass="0.244289" diaginertia="0.000545373 0.000507362 0.000179622"/>
+                                            <joint name="right_tl_robot_joint5" pos="0 0 0" axis="0 0 1" range="-3.14 3.14" actuatorfrcrange="-10 10"/>
+                                            <geom type="mesh" rgba="1 1 1 1" mesh="right_tl_robot_link5"/>
+                                            <body name="right_tl_robot_link6" pos="0 0.0145 0.105" quat="0.707107 -0.707107 0 0">
+                                                <inertial pos="-1.4032e-05 -0.0434237 0.000526799" quat="0.405146 0.579542 -0.579347 0.405395" mass="0.248666" diaginertia="0.00047391 0.000435366 0.00018989"/>
+                                                <joint name="right_tl_robot_joint6" pos="0 0 0" axis="0 0 1" range="-2.35619 2.35619" actuatorfrcrange="-10 10"/>
+                                                <geom type="mesh" rgba="0.568627 0.596078 0.623529 1" mesh="right_tl_robot_link6"/>
+                                                <body name="right_tl_robot_link7" pos="0 -0.1145 -0.0145" quat="0.707107 0.707107 0 0">
+                                                    <inertial pos="-4.26977e-06 -9.34424e-05 0.0269659" quat="0.504845 0.495118 -0.504767 0.495176" mass="0.217904" diaginertia="0.000178911 0.000132896 0.000131821"/>
+                                                    <joint name="right_tl_robot_joint7" pos="0 0 0" axis="0 0 1" range="-3.14 3.14" actuatorfrcrange="-10 10"/>
+                                                    <geom type="mesh" rgba="1 1 1 1" mesh="right_tl_robot_link7"/>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                    <body name="left_tl_robot_link0" pos="0.0150728 0.015 0.315" quat="0 0 0.707107 0.707107">
+                        <inertial pos="0.00192375 -6.92485e-06 0.0385487" quat="0.536265 0.536216 -0.460941 0.460897" mass="0.716846" diaginertia="0.00182028 0.00153779 0.00141877"/>
+                        <geom type="mesh" rgba="0.698039 0.698039 0.698039 1" mesh="left_tl_robot_link0"/>
+                        <body name="left_tl_robot_link1" pos="-0.000927239 0 0.1315">
+                            <inertial pos="-3.22745e-06 -0.0151241 0.0705018" quat="0.701912 0.0876934 -0.0874899 0.70141" mass="0.518479" diaginertia="0.00182386 0.00167109 0.000717622"/>
+                            <joint name="left_tl_robot_joint1" pos="0 0 0" axis="0 0 1" range="-3.14 3.14" actuatorfrcrange="-10 10"/>
+                            <geom type="mesh" rgba="1 1 1 1" mesh="left_tl_robot_link1"/>
+                            <body name="left_tl_robot_link2" pos="0 0.016 0.1315" quat="0.707107 -0.707107 0 0">
+                                <inertial pos="-1.26981e-05 -0.0664218 0.00457834" quat="0.439899 0.55357 -0.553733 0.439806" mass="0.458839" diaginertia="0.00177795 0.00164318 0.000493146"/>
+                                <joint name="left_tl_robot_joint2" pos="0 0 0" axis="0 0 1" range="-2.35619 2.35619" actuatorfrcrange="-10 10"/>
+                                <geom type="mesh" rgba="1 1 1 1" mesh="left_tl_robot_link2"/>
+                                <body name="left_tl_robot_link3" pos="0 -0.1675 -0.016" quat="0.707107 0.707107 0 0">
+                                    <inertial pos="5.34526e-06 0.0166055 0.0826904" quat="0.70397 -0.0657795 0.0659527 0.704094" mass="0.463627" diaginertia="0.00172728 0.00162345 0.000418803"/>
+                                    <joint name="left_tl_robot_joint3" pos="0 0 0" axis="0 0 1" range="-3.14 3.14" actuatorfrcrange="-10 10"/>
+                                    <geom type="mesh" rgba="0.568627 0.596078 0.623529 1" mesh="left_tl_robot_link3"/>
+                                    <body name="left_tl_robot_link4" pos="0 -0.0135 0.153" quat="0.707107 0.707107 0 0">
+                                        <inertial pos="2.77499e-06 0.0694961 0.00637378" quat="0.545314 0.450411 -0.450161 0.545086" mass="0.396498" diaginertia="0.00145833 0.00137497 0.000317175"/>
+                                        <joint name="left_tl_robot_joint4" pos="0 0 0" axis="0 0 -1" range="-2.35619 2.35619" actuatorfrcrange="-10 10"/>
+                                        <geom type="mesh" rgba="1 1 1 1" mesh="left_tl_robot_link4"/>
+                                        <body name="left_tl_robot_link5" pos="0 0.1745 -0.0135" quat="0.707107 -0.707107 0 0">
+                                            <inertial pos="-3.40934e-06 -0.0133245 0.0587132" quat="0.701356 0.0901883 -0.0899373 0.70134" mass="0.244289" diaginertia="0.000545373 0.000507362 0.000179622"/>
+                                            <joint name="left_tl_robot_joint5" pos="0 0 0" axis="0 0 1" range="-3.14 3.14" actuatorfrcrange="-10 10"/>
+                                            <geom type="mesh" rgba="1 1 1 1" mesh="left_tl_robot_link5"/>
+                                            <body name="left_tl_robot_link6" pos="0 0.0145 0.105" quat="0.707107 -0.707107 0 0">
+                                                <inertial pos="-1.4032e-05 -0.0434237 0.000526799" quat="0.405146 0.579542 -0.579347 0.405395" mass="0.248666" diaginertia="0.00047391 0.000435366 0.00018989"/>
+                                                <joint name="left_tl_robot_joint6" pos="0 0 0" axis="0 0 1" range="-2.35619 2.35619" actuatorfrcrange="-10 10"/>
+                                                <geom type="mesh" rgba="0.568627 0.596078 0.623529 1" mesh="left_tl_robot_link6"/>
+                                                <body name="left_tl_robot_link7" pos="0 -0.1145 -0.0145" quat="0.707107 0.707107 0 0">
+                                                    <inertial pos="-4.26978e-06 -9.34424e-05 0.0269659" quat="0.504845 0.495118 -0.504767 0.495176" mass="0.217904" diaginertia="0.000178911 0.000132896 0.000131821"/>
+                                                    <joint name="left_tl_robot_joint7" pos="0 0 0" axis="0 0 1" range="-3.14 3.14" actuatorfrcrange="-10 10"/>
+                                                    <geom type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="left_tl_robot_link7"/>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                    <body name="head1_link" pos="0.016 0 0.439">
+                        <inertial pos="-0.000110545 0.0119119 0.0301068" quat="0.728345 0.685161 0.00103162 0.00818807" mass="0.239994" diaginertia="0.000200782 0.000173539 0.000123611"/>
+                        <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="head1_link"/>
+                        <body name="head2_link" pos="-0.000309152 0.00200183 0.0475" quat="0.999996 0 0 -0.00290371">
+                            <inertial pos="0.0154455 -0.00213388 0.0748128" quat="0.706821 0.707188 0.0118109 -0.0122204" mass="0.409175" diaginertia="0.00127737 0.000945999 0.000725097"/>
+                            <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="head2_link"/>
+                            <body name="head3_link" pos="0.0522292 -0.002 0.0863449">
+                                <inertial pos="0.0115023 -0.00298519 -0.00106984" quat="0.67125 0.73135 0.0754022 -0.0941561" mass="0.0519217" diaginertia="4.04326e-05 3.89041e-05 6.59686e-06"/>
+                                <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="head3_link"/>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+</mujoco>

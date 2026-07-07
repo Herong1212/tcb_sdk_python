@@ -1,0 +1,8 @@
+pin==3.7.0
+numpy==1.24.0
+scipy==1.8.0
+
+cmeel-urdfdom==4.0.1
+cmeel-tinyxml2==10.0.0
+pyserial
+minimalmodbus

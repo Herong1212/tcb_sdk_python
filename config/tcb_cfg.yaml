@@ -1,0 +1,11 @@
+# 机械臂自由度
+DOF: 6 # 7 表示 TCB710 或者 TCB705； 6 表示 TCB610 或者 TCB605
+
+# 机械臂类型，robotarm_function.py 中的运动学解算时候有效
+ARM_TYPE: "TCB610_06" # 目前支持四个型号机械臂，TCB605_05、TCB610_06、TCB705_05、TCB710_06
+
+# 机械臂原点类型，robotarm_function.py 中的运动学解算时候有效
+ORIGIN_TYPE: "default" # 默认: "default"，此原点建模为控制器上对应的标准 DH 建模; 
+                       # 打直（机械原点）: "straight"，需要如果为 7 轴，需要修改 tl_robot_joint4、tl_robot_joint6 的关节转角,
+                       # 例如 TCB710_06N_urdf.urdf 中的  rpy="1.5708 1.5708 0" 修改为 rpy="1.5708 0 0" 以及修改关节限位 lower="-2.35619449" upper="2.35619449"；
+                       # 如果为 6 轴，需要修改 tl_robot_joint3、tl_robot_joint5 的关节转角。均需要确保修改后的模型初始状态为直线情况。
