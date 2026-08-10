@@ -11,7 +11,7 @@ from utils.robotarm_function import RobotArmFunction
 
 class MotionControlTest:
     def __init__(self):
-        self.ip = "192.168.1.13"  # 修改为实际机械臂的IP地址
+        self.ip = "192.168.1.13"  # 修改为实际机械臂的 IP 地址
         self.speed = 30
 
         self.robot_func = RobotArmFunction(color_log=True)
@@ -27,17 +27,13 @@ class MotionControlTest:
     def arm_init(self, mode):
         print(f"机械臂初始化")
 
-        # 如果是示教模式，调用 robot_init_teach()
+        # case1 如果是示教模式，调用 robot_init_teach()
         if mode == "teach":
-            self.robot_func.robot_init_teach(
-                self.arm_6001, self.speed
-            )  # 示教模式下上电
+            self.robot_func.robot_init_teach(self.arm_6001, self.speed)
 
-        # 如果是运行模式（repeat），调用 robot_init_repeat()
+        # case2 如果是运行模式（repeat），调用 robot_init_repeat()
         elif mode == "repeat":
-            self.robot_func.robot_init_repeat(
-                self.arm_6001, self.speed
-            )  # 运行模式下上电
+            self.robot_func.robot_init_repeat(self.arm_6001, self.speed)
 
     # NOTE 回原点测试
     def go_home_test(self):
@@ -52,7 +48,9 @@ class MotionControlTest:
     def movj_test(self):
         print(f"机械臂关节空间运动")
 
+        # 示教模式初始化
         self.arm_init("repeat")
+
         # 定义第一个目标关节位置
         # self.q1 = [0.0, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self.q1 = [0.0, 10.0, 0.0, 0.0, 0.0, 0.0]
@@ -69,6 +67,7 @@ class MotionControlTest:
 
         # 定义一个笛卡尔坐标系下的目标位置
         q_test = [379.852, 0, 209.237, 2.40, 0, 0]
+
         # 1、关节插补到笛卡尔位置
         # ps 目标解析：控制器首先将提供的笛卡尔坐标 [X, Y, Z, Rx, Ry, Rz] 通过 IK 解算为对应的关节角度值；
         # ps 路径规划：获得目标关节角度后，控制器使用关节空间插补方式规划路径 - 即每个关节独立地从当前位置移动到目标位置；
@@ -375,10 +374,10 @@ class MotionControlTest:
     def motion_control_test(self):
         """
         执行机械臂运动控制测试（使用7000端口）。
-        
+
         该函数演示了TCB机械臂SDK的高性能运动控制功能，通过7000端口进行批量轨迹控制。
         7000端口专为高实时性运动控制设计，延迟固定为1ms，适合连续路径规划和高频运动。
-        
+
         测试流程：
         1. 初始化机械臂到运行模式
         2. 通过6001端口创建并配置作业文件（7000端口使用的前置条件）
@@ -386,17 +385,17 @@ class MotionControlTest:
         4. 使用7000端口执行关节空间运动控制（coord="ACS"）
         5. 使用7000端口执行笛卡尔空间运动控制（coord="MCS"）
         6. 演示封装的运动控制功能
-        
+
         关键概念说明：
         - **ACS (Axis Coordinate System)**: 关节坐标系，使用关节角度值
         - **MCS (Machine Coordinate System)**: 机器坐标系（笛卡尔坐标系），使用[x,y,z,rx,ry,rz]格式
         - **双端口架构**: 6001端口负责管理任务，7000端口负责高频运动控制
-        
+
         注意：使用7000端口前必须先通过6001端口创建作业文件，这是安全机制要求。
-        
+
         Args:
             self: 类实例引用，包含机械臂对象和相关配置
-            
+
         Returns:
             None: 该函数不返回任何值，仅执行机械臂运动控制测试
         """
@@ -417,9 +416,9 @@ class MotionControlTest:
 
         # 定义关节空间轨迹数据traj3，包含三个目标位置点（关节角度值）
         self.traj3 = [
-            [10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],   # 第一个点：第1关节旋转10度
+            [10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],  # 第一个点：第1关节旋转10度
             [-10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],  # 第二个点：第1关节反向旋转10度
-            [0.0, 0.0, 90.0, 0.0, 0.0, 0.0, 0.0],   # 第三个点：第3关节旋转90度
+            [0.0, 0.0, 90.0, 0.0, 0.0, 0.0, 0.0],  # 第三个点：第3关节旋转90度
         ]
 
         # 通过7000端口执行关节空间运动控制，coord="ACS"表示使用关节坐标系
@@ -433,19 +432,26 @@ class MotionControlTest:
 
         # 定义笛卡尔空间轨迹数据traj_test，包含6个连续的目标位置点（6维笛卡尔坐标）
         traj_test = [
-            [279.852, 0, 409.237, -3.141, 0, 0],      # 起始点：X=279.852mm, Z=409.237mm, rx=-3.141rad
-            [379.852, 0, 409.237, -3.141, 0, 0],      # X方向移动+100mm
-            [179.852, 0, 409.237, -3.141, 0, 0],      # X方向移动-100mm（相对于起始点）
+            [
+                279.852,
+                0,
+                409.237,
+                -3.141,
+                0,
+                0,
+            ],  # 起始点：X=279.852mm, Z=409.237mm, rx=-3.141rad
+            [379.852, 0, 409.237, -3.141, 0, 0],  # X方向移动+100mm
+            [179.852, 0, 409.237, -3.141, 0, 0],  # X方向移动-100mm（相对于起始点）
             [279.852, 200.0, 409.237, -3.141, 0, 0],  # Y方向移动+200mm
-            [279.852, -200.0, 409.237, -3.141, 0, 0], # Y方向移动-200mm（相对于起始点）
-            [279.852, 0, 409.237, -3.141, 0, 0],      # 回到起始点，形成闭合轨迹
+            [279.852, -200.0, 409.237, -3.141, 0, 0],  # Y方向移动-200mm（相对于起始点）
+            [279.852, 0, 409.237, -3.141, 0, 0],  # 回到起始点，形成闭合轨迹
         ]
 
         # 通过7000端口执行笛卡尔空间单点运动，将机械臂移动到q_test位置
         self.arm_7000.motion_control([q_test], coord="MCS")
         # 延时6秒，等待单点运动完成
         time.sleep(6)
-       
+
         # 通过7000端口执行完整的笛卡尔空间轨迹运动，实现复杂的连续路径规划
         self.arm_7000.motion_control(traj_test, coord="MCS")
         # 延时1秒，等待轨迹运动完成（由于是连续路径，时间相对较短）
@@ -467,29 +473,29 @@ class MotionControlTest:
 
     def servo_point_motion_control_test(self):
         """
-        执行机械臂伺服点位运动控制测试（使用7000端口）。
-        
-        该函数演示了TCB机械臂SDK的伺服点位运动控制功能，这是一种高实时性的运动控制模式。
+        执行机械臂伺服点位运动控制测试（使用 7000 端口）。
+
+        该函数演示了 TCB 机械臂 SDK 的伺服点位运动控制功能，这是一种高实时性的运动控制模式。
         伺服点位控制采用分帧流式发送方式，客户端需要逐帧发送轨迹点，控制器实时响应每个点。
-        
+
         测试流程：
         1. 初始化机械臂到运行模式
         2. 启用伺服点位运动控制模式
         3. 获取当前位置作为起始点
-        4. 生成100个连续的轨迹点（第1关节逐步增加0.5度）
-        5. 逐帧发送轨迹点到7000端口，实现连续的伺服点位控制
-        
+        4. 生成 100 个连续的轨迹点（第 1 关节逐步增加 0.5 度）
+        5. 逐帧发送轨迹点到 7000 端口，实现连续的伺服点位控制
+
         伺服点位控制特点：
-        - **高实时性**：延迟固定为1ms，适合需要精确时间控制的应用
-        - **分帧传输**：通过sum和count参数将完整轨迹分成多帧发送
+        - **高实时性**：延迟固定为 1ms，适合需要精确时间控制的应用
+        - **分帧传输**：通过 sum 和 count 参数将完整轨迹分成多帧发送
         - **灵活性高**：可随时调整或中断运动轨迹
         - **客户端控制**：由客户端精确控制每个点的发送时间间隔
-        
+
         注意：伺服点位控制模式与批量运动控制模式互斥，不可同时使用。
-        
+
         Args:
             self: 类实例引用，包含机械臂对象和相关配置
-            
+
         Returns:
             None: 该函数不返回任何值，仅执行伺服点位运动控制测试
         """
@@ -537,13 +543,13 @@ class MotionControlTest:
 if __name__ == "__main__":
     test = MotionControlTest()
     # test.go_home_test()
-    # test.movj_test()
+    test.movj_test()
     # test.movl_test()
     # test.movc_test()
     # test.jog_operation_test()
     # test.directmotion_mode_test()
     # test.motion_control_test()
-    test.servo_point_motion_control_test()
+    # test.servo_point_motion_control_test()
 
     # test.robot_func.robot_stop(test.arm_6001)
     # test.arm_6001.disconnect()
@@ -562,12 +568,15 @@ if __name__ == "__main__":
 
     # 将位姿矩阵转换为位置和姿态向量（位置 x, y, z 和欧拉角 a,b,c）
     pos = test.robot_func._matrix_to_pose(T)
-    print(f"当前末端执行器位姿向量：{pos}")
+    print(f"当前末端执行器位姿向量: {pos}")
     # 将姿态向量中的角度值保留 4 位小数，并存储到新列表中
     pos_ = [round(angle, 4) for angle in pos]
-    print(f"当前末端执行器位姿向量：{pos_}")
+    print(f"当前末端执行器位姿向量(保留 4 位小数): {pos_}")
 
     # ps1 输出通过正运动学计算得到的姿态值（欧拉角 a,b,c)，即列表中索引 3 及以后的元素
-    print(f"通过正运动学计算得到的姿态值（欧拉角 a,b,c):  ",pos_[3:])
-    # ps2 输出通过 6001 端口直接查询得到的姿态值（欧拉角 a,b,c），同样保留 4 位小数，这样可以验证运动学计算的准确性。
-    print(f"通过 6001 端口直接查询得到的姿态值（欧拉角 a,b,c):  ",test.arm_6001.currentpos_inquiry(1)[3:])
+    print(f"通过正运动学计算得到的姿态值（欧拉角 a, b, c):  ", pos_[3:])
+    # ps2 输出通过 6001 端口直接查询得到的姿态值（欧拉角 a, b, c），同样保留 4 位小数，这样可以验证运动学计算的准确性。
+    print(
+        f"通过 6001 端口直接查询得到的姿态值（欧拉角 a,b,c):  ",
+        test.arm_6001.currentpos_inquiry(1)[3:],
+    )

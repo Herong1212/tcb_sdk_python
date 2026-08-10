@@ -1,3 +1,6 @@
 # vscode
 .vscode/
 .history/
+
+# cache
+__pycache__/

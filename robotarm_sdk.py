@@ -30,7 +30,7 @@ from typing import Any, Dict, List, Optional, Tuple
 class RobotArmSDK:
     def __init__(self, ip: str, port: int, log_level: int = 0, color_log: bool = True):
         """
-        初始化SDK
+        初始化 SDK
 
         Args:
             ip(str): 机械臂 IP 地址
@@ -45,19 +45,19 @@ class RobotArmSDK:
         Returns:
             None
         """
-        # 将传入的机械臂IP地址保存到实例变量中，用于后续建立TCP连接
+        # 将传入的机械臂 IP 地址保存到实例变量中，用于后续建立TCP连接
         self.ip = ip
 
-        # 将传入的端口号保存到实例变量中，端口号决定了连接的是通用控制(6001)还是运动控制(7000)功能
+        # 将传入的端口号保存到实例变量中，端口号决定了连接的是通用控制 (6001) 还是运动控制 (7000) 功能
         self.port = port
 
-        # 初始化socket对象为None，后续在connect方法中会创建实际的TCP连接套接字
-        # Optional[socket.socket]表示该变量要么是socket.socket类型的对象，要么是None
+        # 初始化 socket 对象为 None，后续在 connect() 方法中会创建实际的 TCP 连接套接字
+        # Optional[socket.socket] 表示该变量要么是 socket.socket 类型的对象，要么是 None
         self.socket: Optional[socket.socket] = None
 
-        # self._connect_flag实际上是一个连接状态控制标志，用于控制接收线程的运行状态：
-        #   1、当self._connect_flag为False时，表示连接正常，接收线程可以继续运行；
-        #   2、当self._connect_flag为True时，表示需要断开连接，接收线程会检测到这个标志并退出；
+        # self._connect_flag 实际上是一个连接状态控制标志，用于控制接收线程的运行状态：
+        #   1、当 self._connect_flag 为 False 时，表示连接正常，接收线程可以继续运行；
+        #   2、当 self._connect_flag 为 True 时，表示需要断开连接，接收线程会检测到这个标志并退出；
         self._connect_flag = False
 
         # 字典类型变量，用于存储从机械臂控制器返回的状态信息，包括各种传感器数据、关节角度、错误码等实时状态
@@ -70,7 +70,7 @@ class RobotArmSDK:
         # 线程锁对象，用于保护共享资源 return_status 的安全访问，防止多个线程同时修改状态数据造成竞争条件
         self._status_lock = threading.Lock()
 
-        # 设置 NumPy 数组打印格式，suppress=True 抑制科学计数法显示，precision=4 保留4位小数。便于查看和调试关节角度、位置坐标等浮点数值
+        # 设置 NumPy 数组打印格式，suppress=True 抑制科学计数法显示，precision=4 保留 4 位小数。便于查看和调试关节角度、位置坐标等浮点数值
         np.set_printoptions(suppress=True, precision=4)
 
         # 延迟时间变量，单位秒，用于控制命令发送的频率，防止发送过快导致控制器处理不过来
@@ -185,8 +185,8 @@ class RobotArmSDK:
         """
         支持 with 上下文管理器
         1、在 with 语句开始时被自动调用；
-        2、负责建立与机械臂的连接（调用 connect() 方法）；
-        3、返回自身实例，使得可以在 with 块中使用这个实例；
+        2、负责建立与机械臂的连接 (调用 connect() 方法);
+        3、返回自身实例, 使得可以在 with 块中使用这个实例；
         """
 
         self.connect()
@@ -211,7 +211,7 @@ class RobotArmSDK:
         """
         连接到机械臂设备
 
-        尝试通过 socket 连接到指定IP地址和端口的机械臂设备，支持多次重试机制。
+        尝试通过 socket 连接到指定 IP 地址和端口的机械臂设备，支持多次重试机制。
         根据不同端口设置不同的延迟时间，并启动接收线程处理数据。
 
         Args:
@@ -219,7 +219,7 @@ class RobotArmSDK:
             delay (float): 每次重连之间的延迟时间（秒），默认为 2.0 秒
 
         Returns:
-            bool: 连接成功返回 True，否则返回 False
+            bool: 连接成功返回 True, 否则返回 False
         """
         # 尝试连接到机械臂设备，最多重试指定次数
         for attempt in range(1, retries + 1):
@@ -227,19 +227,20 @@ class RobotArmSDK:
                 # 创建 socket 连接并设置超时时间
                 self.socket = socket.socket()
                 self.socket.settimeout(5)  # 5秒
-                self.socket.connect((self.ip, self.port))
+                self.socket.connect((self.ip, self.port))  # * 连接机械臂
                 self._connect_flag = False
+
                 # 启动接收数据线程
                 self._start_receive_thread()
                 self.logger.info(f"成功连接到 {self.ip}:{self.port}")
 
                 # 根据端口号设置不同的延迟时间
-                # case1 7000端口用于连续的运动控制，需要快速发送指令，因此使用固定的最短延迟
+                # case1 7000端口 用于连续的运动控制，需要快速发送指令，因此使用固定的最短延迟
                 if self.port == 7000:
                     self.delay_time = 0.001
                 elif self.port == 6001:
-                    # case2 6001端口用于配置和状态查询，其频率不需要太高，根据控制器的实际通讯周期来设置可以避免过度占用网络带宽和控制器资源
-                    self.logger.info(f"当前SDK支持 {self.dof} 自由度的 TCB 机械臂")
+                    # case2 6001端口 用于配置和状态查询，其频率不需要太高，根据控制器的实际通讯周期来设置可以避免过度占用网络带宽和控制器资源
+                    self.logger.info(f"当前 SDK 支持 {self.dof} 自由度的 TCB 机械臂")
                     # 查询控制周期并设置延迟时间
                     self.delay_time = self.control_cycle_inquire() / 1000
 
@@ -261,7 +262,7 @@ class RobotArmSDK:
         """
         断开连接并清理资源
 
-        设置连接标志为 True，通知接收线程停止运行；
+        设置连接标志为 True, 通知接收线程停止运行；
         在 _receive_loop() 中会检测这个标志并退出循环；
         """
         self._connect_flag = True
@@ -453,7 +454,6 @@ class RobotArmSDK:
 
         Args:
             None
-
         Returns:
             bool: 心跳包状态标志
                 - True:  心跳包正常
@@ -1128,8 +1128,7 @@ class RobotArmSDK:
     # NOTE 机械臂回零点
     def go_home(self, robot: int = 1, isWithExternal: int = 0) -> None:
         """
-        机器人回原点
-        (需要示教模式下，将伺服改为使能状态, 否则发送命令机器人也不会动作)
+        机器人回原点 (需要示教模式下，将伺服改为使能状态, 否则发送命令机器人也不会动作)
 
         Args:
             robot(int): 机器人号码
@@ -1275,8 +1274,8 @@ class RobotArmSDK:
                 - 3:  用户坐标(User)
             pos(List[float]):[1.1,2.2,3.3,4.4,5.5,6.6,7.7]
                 - 关节坐标分别代表关节角度值
-                - 直角坐标系分别x,y,z,a,b,c其中欧拉角的旋转顺序为'zyx',
-                  工具、用户同直角直角坐标系下第七位参数默认为0即可
+                - 直角坐标系分别 x,y,z,a,b,c 其中欧拉角的旋转顺序为 'zyx',
+                  工具、用户同直角直角坐标系下第七位参数默认为 0 即可
             block(int):
                 - 0: 非阻塞模式
                 - 1: 阻塞模式

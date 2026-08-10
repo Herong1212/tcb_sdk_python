@@ -418,9 +418,9 @@ class RobotArmFunction:
                 - False: 初始化失败
         """
         # 记录日志：开始运行模式初始化
-        self.logger.info(f"机械臂初始化(robot_init_repeat)")
+        self.logger.info(f"机械臂初始化 (robot_init_repeat)")
 
-        # 设置超时时间：10秒，防止初始化过程无限等待
+        # 设置超时时间：10 秒，防止初始化过程无限等待
         timeout = 10
 
         # 查询当前伺服状态（0=停止, 1=就绪, 2=错误, 3=运行）
