@@ -21,10 +21,10 @@
         <mesh name="tl_robot_link4" content_type="model/stl" file="../meshes/tl_robot_link4.STL"/>
         <mesh name="tl_robot_link5" content_type="model/stl" file="../meshes/tl_robot_link5.STL"/>
         <mesh name="tl_robot_link6" content_type="model/stl" file="../meshes/tl_robot_link6.STL"/>
-        <mesh name="gripper_base" content_type="model/stl" file="../../lebai_lmg90_gripper/meshes/gripper_base.stl"/>
+        <!-- <mesh name="gripper_base" content_type="model/stl" file="../../lebai_lmg90_gripper/meshes/gripper_base.stl"/>
         <mesh name="gripper_link1" content_type="model/stl" file="../../lebai_lmg90_gripper/meshes/gripper_link1.stl"/>
         <mesh name="gripper_link2" content_type="model/stl" file="../../lebai_lmg90_gripper/meshes/gripper_link2.stl"/>
-        <mesh name="gripper_link_finger" content_type="model/stl" file="../../lebai_lmg90_gripper/meshes/gripper_link_finger.stl"/>
+        <mesh name="gripper_link_finger" content_type="model/stl" file="../../lebai_lmg90_gripper/meshes/gripper_link_finger.stl"/> -->
     </asset>
     <worldbody>
         <!-- ps 好像是固定底座？ -->
@@ -75,10 +75,9 @@
                                     </body>
 
                                     <!-- 乐白 LMG90 夹爪 -->
-                                    <body name="gripper_base" pos="0 0 0.065">
+                                    <!-- <body name="gripper_base" pos="0 0 0.065">
                                         <geom type="mesh" rgba="0.86 0.85 0.81 1" mesh="gripper_base"/>
 
-                                        <!-- 右指链 -->
                                         <body name="gripper_r_link1" pos="0.025 0 0.0856" quat="0 0 0.707107 0.707107">
                                             <joint name="gripper_r_joint1" axis="0 0 1" range="-10 10" class="gripper"/>
                                             <geom type="mesh" rgba="0.86 0.85 0.81 1" mesh="gripper_link1"/>
@@ -92,7 +91,6 @@
                                             </body>
                                         </body>
 
-                                        <!-- 左指链 -->
                                         <body name="gripper_l_link1" pos="-0.025 0 0.0856" quat="0.707107 0.707107 0 0">
                                             <joint name="gripper_l_joint1" axis="0 0 1" range="-10 10" class="gripper"/>
                                             <geom type="mesh" rgba="0.86 0.85 0.81 1" mesh="gripper_link1"/>
@@ -106,7 +104,7 @@
                                                 <body name="gripper_tip" pos="0.0115 0 0"/>
                                             </body>
                                         </body>
-                                    </body>
+                                    </body> -->
                                 </body>
                             </body>
                         </body>
@@ -126,11 +124,11 @@
         <position name="actuator_joint6" joint="tl_robot_joint6" class="arm"/>
 
         <!-- 夹爪控制 -->
-        <position name="actuator_gripper_r_joint1" joint="gripper_r_joint1" class="gripper" kp="500"/>
+        <!-- <position name="actuator_gripper_r_joint1" joint="gripper_r_joint1" class="gripper" kp="500"/>
         <position name="actuator_gripper_r_joint2" joint="gripper_r_joint2" class="gripper" kp="500"/>
         <position name="actuator_gripper_r_joint_finger" joint="gripper_r_joint_finger" class="gripper" kp="500"/>
         <position name="actuator_gripper_l_joint1" joint="gripper_l_joint1" class="gripper" kp="500"/>
         <position name="actuator_gripper_l_joint2" joint="gripper_l_joint2" class="gripper" kp="500"/>
-        <position name="actuator_gripper_l_joint_finger" joint="gripper_l_joint_finger" class="gripper" kp="500"/>
+        <position name="actuator_gripper_l_joint_finger" joint="gripper_l_joint_finger" class="gripper" kp="500"/> -->
     </actuator>
 </mujoco>

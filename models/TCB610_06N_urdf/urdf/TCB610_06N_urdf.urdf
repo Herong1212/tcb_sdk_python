@@ -4,49 +4,60 @@
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot name="TCB610_06N_urdf">
     <mujoco>
-        <!-- * 这是 MuJoCo 官方支持的特性：在 URDF 文件里嵌入 MuJoCo 专属配置 -->
+        <!-- * 这是 MuJoCo 官方支持的特性：在 URDF 文件里嵌入 MuJoCo 专属配置，<mujoco> 不是标准 ROS URDF 的核心标签，而是给 MuJoCo 的 URDF 导入器提供额外配置 -->
+        <!-- 标准 URDF 解析器可能会忽略它，MuJoCo 导入器则可能读取它 -->
         <!-- ! <mujoco> 块里只能写编译器相关的设置，主要是 <compiler> -->
 
-        <!-- <compiler meshdir="../meshes/" discardvisual="false"/> -->
-        <!-- discardvisual: 忽略可视化信息，只保留物理信息，可选有 [false, true], “false” for MJCF, “true” for URDF -->
-        <!-- balanceinertia: 自动修正不合理的惯性矩阵，可选有 [false, true], [false, true], “false” -->
-        <!-- strippath: 保留 mesh 文件的路径前缀，可选有 [false, true], “false” -->
-        <compiler meshdir="../meshes/" discardvisual="false" balanceinertia="false" strippath="false" />
+        <!-- discardvisual: 表示 MuJoCo 导入 URDF 时，不丢弃 <visual> 中的外观几何体，可选有 [false, true], “false” for MJCF, “true” for URDF -->
+        <compiler meshdir="../meshes/" discardvisual="false"/>
     </mujoco>
 
-    <!-- ps 好像是固定底座 -->
+    <!-- NOTE 机械臂最底部的基础连杆，可以理解为机械臂底座 -->
     <link name="tl_robot_link0">
+        <!-- inertial：质量、重心和转动惯量 -->
         <inertial>
+            <!-- origin：表示 link0 的惯性坐标系，也就是重心坐标系，相对于 link0 自身坐标系的位置和姿态 -->
             <origin xyz="0.000197158335101408 -5.65942773516878E-05 0.0376676214851066" rpy="0 0 0" />
+            <!-- 定义 link0 的质量 -->
             <mass value="0.749899458922545" />
+            <!-- 定义 link0 相对于重心的转动惯量矩阵 -->
+            <!-- ! 仅在 RViz 中显示模型时，惯性参数通常不起作用 -->
             <inertia ixx="0.00156235136176764" ixy="-6.48262732748015E-08" ixz="4.21713907756751E-05" iyy="0.00143055291291807" iyz="-1.4740224733695E-07" izz="0.00181952433904877" />
         </inertial>
+
+        <!-- visual：决定在 RViz、Gazebo 或其他可视化软件里，这个连杆看起来是什么形状和颜色 -->
         <visual>
+            <!-- origin：表示视觉网格的坐标系，相对于 link0 自身坐标系的位置和姿态，这里即与 link0 坐标系完全重合 -->
             <origin xyz="0 0 0" rpy="0 0 0" />
+            <!-- geometry：定义视觉几何形状 -->
             <geometry>
+                <!-- 表示视觉模型使用一个 STL 网格文件 -->
+                <!-- ps package://TCB610_06N_urdf/meshes/tl_robot_link0.STL 含义：ROS 查找名为 TCB610_06N_urdf 的功能包，然后进入该包中的 meshes 目录，再加载 tl_robot_link0.STL 文件 -->
                 <!-- <mesh filename="package://TCB610_06N_urdf/meshes/tl_robot_link0.STL" /> -->
                 <mesh filename="../meshes/tl_robot_link0.STL" />
             </geometry>
+            <!-- material：定义视觉材质，name="" 表示材质没有设置有效名称，这种写法可以正常指定局部颜色，但不方便让其他连杆重复引用同一个材质，更规范的写法是自定义例如 name = "base_color" -->
             <material name="">
                 <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
             </material>
         </visual>
+
+        <!-- collision：碰撞检测使用什么形状 -->
         <collision>
+            <!-- origin：碰撞模型的坐标系与 link0 自身坐标系重合 -->
             <origin xyz="0 0 0" rpy="0 0 0" />
+            <!-- geometry：定义碰撞几何体 -->
             <geometry>
+                <!-- 碰撞检测也使用 tl_robot_link0.STL，这意味着视觉模型和碰撞模型使用同一个高精度网格 -->
+                <!-- ps 优点是形状准确，缺点是碰撞检测速度可能较慢，仿真计算量较大等等 -->
+                <!-- ! 工业项目一般会另外制作简化碰撞模型，如 tl_robot_link0_collision.STL，或者使用多个 box、cylinder、sphere 近似表示 -->
+                <!-- <mesh filename="package://TCB610_06N_urdf/meshes/tl_robot_link0.STL" /> -->
                 <mesh filename="../meshes/tl_robot_link0.STL" />
             </geometry>
         </collision>
     </link>
 
-    <!-- ps 关节 1 及其连杆 -->
-    <joint name="tl_robot_joint1" type="revolute">
-        <origin xyz="0 0 0.1305" rpy="0 0 0" />
-        <parent link="tl_robot_link0" />
-        <child link="tl_robot_link1" />
-        <axis xyz="0 0 1" />
-        <limit lower="-3.141592654" upper="3.141592654" effort="0" velocity="0" />
-    </joint>
+    <!-- NOTE 连杆 1 -->
     <link name="tl_robot_link1">
         <inertial>
             <origin xyz="-3.22169620622034E-06 -0.0151242570890185 0.0705019653501001" rpy="0 0 0" />
@@ -59,6 +70,7 @@
                 <mesh filename="../meshes/tl_robot_link1.STL" />
             </geometry>
             <material name="">
+                <!-- 完全不透明的白色 -->
                 <color rgba="1 1 1 1" />
             </material>
         </visual>
@@ -69,16 +81,28 @@
             </geometry>
         </collision>
     </link>
-
-
-    <!-- ps 关节 2 及其连杆 -->
-    <joint name="tl_robot_joint2" type="revolute">
-        <origin xyz="0 0.016 0.1315" rpy="-1.5708 0 0" />
-        <parent link="tl_robot_link1" />
-        <child link="tl_robot_link2" />
-        <axis xyz="0 0 -1" />
-        <limit lower="-2.35619449" upper="2.35619449" effort="0" velocity="0" />
+    <!-- NOTE 关节 1 -->
+    <!-- "revolute" 表示这是一个有角度限制的旋转关节，除此之外，还有： -->
+    <!-- continuous：描述旋转运动，可以围绕某一个轴无限旋转，比如小车的轮子 -->
+    <!-- prismatic：滑动关节，可以沿某一个轴平移，也带有位置的极限，一般直线电机就是这种运动方式 -->
+    <!-- fixed：固定关节，是唯一一种不允许运动的关节，不过使用还是比较频繁的，比如相机这个连杆，安装在机器人上，相对位置是不会变化的，此时使用的连接方式就是 Fixed -->
+    <!-- Floating：浮动关节，planar：平面关节，这两种使用相对较少 -->
+    <joint name="tl_robot_joint1" type="revolute">
+        <!-- 表示在关节角度为 0 时，joint1 坐标系相对于父连杆 link0 坐标系的位置和姿态 -->
+        <origin xyz="0 0 0.1305" rpy="0 0 0" />
+        <parent link="tl_robot_link0" />
+        <child link="tl_robot_link1" />
+        <!-- axis：表示绕 joint1 坐标系的 Z 轴旋转 -->
+        <!-- ! axis 是在关节坐标系中表达的，不一定是在世界坐标系中表达 -->
+        <axis xyz="0 0 1" />
+        <!-- limit：关节角度、速度和力矩限制 -->
+        <!-- effort="0"：对于旋转关节，effort 表示最大允许力矩，单位是 N·m，这里写 0 并不表示“没有限制”，而往往会被控制器或规划器理解为最大力矩为 0 N·m，这是潜在问题！！！ -->
+        <!-- velocity="0"：对于旋转关节，表示最大角速度，单位是 rad/s，写 0 可能导致 MoveIt、控制器或仿真器认为该关节不能运动，因此实际使用时，应根据厂家参数填写真实值 -->
+        <limit lower="-3.141592654" upper="3.141592654" effort="0" velocity="0" />
     </joint>
+
+
+    <!-- NOTE 连杆 2 -->
     <link name="tl_robot_link2">
         <inertial>
             <origin xyz="-3.64948803709113E-06 -0.15878316508675 0.00258163777686799" rpy="0 0 0" />
@@ -101,15 +125,18 @@
             </geometry>
         </collision>
     </link>
-
-    <!-- ps 关节 3 及其连杆 -->
-    <joint name="tl_robot_joint3" type="revolute">
-        <origin xyz="0 -0.3205 -0.0295" rpy="-3.14 0 1.5708" />
-        <parent link="tl_robot_link2" />
-        <child link="tl_robot_link3" />
-        <axis xyz="0 0 1" />
-        <limit lower="-0.959931089" upper="4.101523742" effort="0" velocity="0" />
+    <!-- NOTE 关节 2 -->
+    <joint name="tl_robot_joint2" type="revolute">
+        <!-- 姿态上：关节 2 的坐标系相对于 link1 坐标系绕 X 轴旋转了约 -90° -->
+        <origin xyz="0 0.016 0.1315" rpy="-1.5708 0 0" />
+        <parent link="tl_robot_link1" />
+        <child link="tl_robot_link2" />
+        <!-- 表示第二关节绕关节坐标系的 -Z 轴旋转 -->
+        <axis xyz="0 0 -1" />
+        <limit lower="-2.35619449" upper="2.35619449" effort="0" velocity="0" />
     </joint>
+
+    <!-- NOTE 连杆 3 -->
     <link name="tl_robot_link3">
         <inertial>
             <origin xyz="2.78354237109954E-06 0.0694960867121006 0.00637377402709792" rpy="0 0 0" />
@@ -132,6 +159,14 @@
             </geometry>
         </collision>
     </link>
+    <!-- NOTE 关节 3 -->
+    <joint name="tl_robot_joint3" type="revolute">
+        <origin xyz="0 -0.3205 -0.0295" rpy="-3.14 0 1.5708" />
+        <parent link="tl_robot_link2" />
+        <child link="tl_robot_link3" />
+        <axis xyz="0 0 1" />
+        <limit lower="-0.959931089" upper="4.101523742" effort="0" velocity="0" />
+    </joint>
 
     <!-- ps 关节 4 及其连杆 -->
     <joint name="tl_robot_joint4" type="revolute">
@@ -196,14 +231,7 @@
     </link>
 
 
-    <!-- ps 关节 6 及其连杆 -->
-    <joint name="tl_robot_joint6" type="revolute">
-        <origin xyz="0 -0.1145 -0.0145" rpy="1.5708 0 0" />
-        <parent link="tl_robot_link5" />
-        <child link="tl_robot_link6" />
-        <axis xyz="0 0 1" />
-        <limit lower="-3.141592654" upper="3.141592654" effort="0" velocity="0" />
-    </joint>
+    <!-- NOTE 连杆 6，通常是机械臂最后一级腕部或法兰连杆 -->
     <link name="tl_robot_link6">
         <inertial>
             <origin xyz="8.18734378994135E-06 9.1246482065654E-05 0.0267686825888341" rpy="0 0 0" />
@@ -216,6 +244,7 @@
                 <mesh filename="../meshes/tl_robot_link6.STL" />
             </geometry>
             <material name="">
+                <!-- 颜色为很浅的灰白色 -->
                 <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
             </material>
         </visual>
@@ -226,38 +255,59 @@
             </geometry>
         </collision>
     </link>
+    <!-- NOTE 关节 6 -->
+    <!-- 通常是最末端的腕部旋转关节 -->
+    <joint name="tl_robot_joint6" type="revolute">
+        <!-- 关节 6 的坐标系绕 X 轴旋转了约 +90° -->
+        <origin xyz="0 -0.1145 -0.0145" rpy="1.5708 0 0" />
+        <parent link="tl_robot_link5" />
+        <child link="tl_robot_link6" />
+        <!-- 第六关节绕其关节坐标系正 Z 轴旋转 -->
+        <axis xyz="0 0 1" />
+        <limit lower="-3.141592654" upper="3.141592654" effort="0" velocity="0" />
+    </joint>
 
+    <!-- *************** 到这里，原始的六自由度机械臂运动链已经完整 *************** -->
 
-    <!-- 修正末端 180度 偏差的虚拟关节和连杆 -->
+    <!-- 修正末端 180 度 偏差的虚拟关节和连杆 -->
+    <!-- * 目的是为了让 x 轴的正方向朝前方，y 轴朝向右方，z 轴朝下！！！ -->
     <joint name="tl_robot_joint_end" type="fixed">
+        <!-- ps 真正让末端旋转 180° 的是下面这句！！！ -->
         <origin xyz="0 0 0" rpy="0 0 -3.141592654" />
-        <!-- 绕Z轴旋转 180度 修正 -->
+        <!-- 绕 Z 轴旋转 180度 修正 -->
         <parent link="tl_robot_link6" />
         <child link="tl_robot_link_end" />
+        <!-- 固定关节不发生运动，所以 axis 在这里没有意义，可以删除 -->
         <axis xyz="0 0 1" />
     </joint>
 
-    <!--  -->
+    <!-- 虚拟末端连杆 -->
     <link name="tl_robot_link_end">
         <inertial>
+            <!-- 虚拟连杆的重心位于自身原点，重心坐标系方向与连杆坐标系相同 -->
             <origin xyz="0 0 0" rpy="0 0 0" />
+            <!-- 虚拟连杆质量为 1g，这是一个人为设置的极小质量，不一定对应真实物体 -->
             <mass value="0.001" />
+            <!-- 表示人为构造了一个各方向惯量相同、没有耦合的小物体 -->
             <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
         </inertial>
         <visual>
+            <!-- 可视化几何体放在 link_end 原点，并且不进行额外旋转 -->
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <box size=".1 .1 .1" />
-                <!-- 小方块用于可视化 -->
+                <!-- 使用一个长方体作为显示形状，实际上是一个 10 mm × 10 mm × 10 mm 的小立方体，用于可视化 -->
+                <box size=".01 .01 .01" />
             </geometry>
             <material name="eef_color">
-                <color rgba="1 0 0 1" />
-                <!-- 红色半透明 -->
+                <!-- 显示为半透明红色小方块 -->
+                <color rgba="1 0 0 0.5" />
             </material>
         </visual>
         <collision>
+            <!-- 碰撞体位于 link_end 原点，并且没有额外旋转 -->
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
+                <!-- 碰撞体为一个小立方体，尺寸为 1 mm × 1 mm × 1 mm -->
                 <box size="0.001 0.001 0.001" />
                 <!-- 很小的碰撞体 -->
             </geometry>
